@@ -3,4 +3,4 @@
 Testing Jenkins Configuration for ansible.
 Testing Jenkins Configuration for ansible.
 Testing Jenkins Configuration for ansible.
-Testing Successful.
+Tested Successfully.
