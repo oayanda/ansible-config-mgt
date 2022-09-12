@@ -1,6 +1,3 @@
 # ansible-config-mgt
+Test Successful
 
-Auto Test Successful
-Auto Test Successful Auto Test Successful
-Success
-Success
