@@ -1,3 +1,3 @@
 # ansible-config-mgt
 
-Testing Configuration.
+Testing Jenkins Configuration for ansible.
