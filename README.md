@@ -1,5 +1,5 @@
 # ansible-config-mgt
 
-Auto Test Successful
+Automation Test Successful
 
 
