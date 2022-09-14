@@ -22,7 +22,7 @@
 
     - name: Change time zone to Africa/lagos
       timezone:
-        name: Africa/lagos
+         name: Africa/Lagos
 
 - name: update LB server
   hosts: lb
