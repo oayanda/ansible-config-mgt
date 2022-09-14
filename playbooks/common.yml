@@ -10,6 +10,18 @@
         name: wireshark
         state: latest
 
+    - name: Create a new directory named New-Dir
+      path: ~/New-Dir
+      state: directory
+
+    - name: Create a file named new-file
+      path: ~/New-Dir/new-file
+      state: touch
+
+    - name: Change time zone to Africa/lagos
+      timezone:
+        name: Africa/lagos
+
 - name: update LB server
   hosts: lb
   remote_user: ubuntu
