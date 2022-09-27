@@ -16,9 +16,9 @@
   become: yes
   become_user: root
   tasks:
-    # - name: Update apt repo
-    #   apt: 
-    #     update_cache: yes
+    - name: Update apt repo
+      apt: 
+        update_cache: yes
 
     - name: ensure wireshark is at the latest version
       apt:
