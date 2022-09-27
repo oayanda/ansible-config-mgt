@@ -1,7 +1,7 @@
 ---
-- name: update webserver
-  hosts: webservers
-  remote_user: osboxes
+- name: update web, nfs and db servers
+  hosts: webservers, nfs, db
+  remote_user: ec2-user
   become: yes
   become_user: root
   tasks:
@@ -10,16 +10,31 @@
         name: wireshark
         state: latest
 
-    - name: Create a new directory named New-Dir
-      file:
-       path: ~/New-Dir
-       state: directory
+- name: update LB server
+  hosts: lb
+  remote_user: ubuntu
+  become: yes
+  become_user: root
+  tasks:
+    - name: Update apt repo
+      apt: 
+        update_cache: yes
 
-    - name: Create a file named new-file
-      file:
-       path: ~/New-Dir/new-file
-       state: touch
+    - name: ensure wireshark is at the latest version
+      apt:
+        name: wireshark
+        state: latest
 
-    - name: Change time zone to Africa/lagos
-      timezone:
-         name: Africa/Lagos
+    # - name: Create a new directory named New-Dir
+    #   file:
+    #    path: ~/New-Dir
+    #    state: directory
+
+    # - name: Create a file named new-file
+    #   file:
+    #    path: ~/New-Dir/new-file
+    #    state: touch
+
+    # - name: Change time zone to Africa/lagos
+    #   timezone:
+    #      name: Africa/Lagos
