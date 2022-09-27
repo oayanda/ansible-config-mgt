@@ -1,8 +1,8 @@
 ---
-- name: update web, nfs and db servers
-  hosts: webservers, nfs, db
-  remote_user: ec2-user
-  become: true
+- name: update webserver
+  hosts: webservers
+  remote_user: osboxes
+  become: yes
   become_user: root
   tasks:
     - name: ensure wireshark is at the latest version
@@ -23,18 +23,3 @@
     - name: Change time zone to Africa/lagos
       timezone:
          name: Africa/Lagos
-
-- name: update LB server
-  hosts: lb
-  remote_user: ubuntu
-  become: true
-  become_user: root
-  tasks:
-    - name: Update apt repo
-      apt: 
-        update_cache: yes
-
-    - name: ensure wireshark is at the latest version
-      apt:
-        name: wireshark
-        state: latest
