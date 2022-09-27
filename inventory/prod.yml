@@ -1,0 +1,13 @@
+    # - name: Create a new directory named New-Dir
+    #   file:
+    #    path: ~/New-Dir
+    #    state: directory
+
+    # - name: Create a file named new-file
+    #   file:
+    #    path: ~/New-Dir/new-file
+    #    state: touch
+
+    # - name: Change time zone to Africa/lagos
+    #   timezone:
+    #      name: Africa/Lagos
