@@ -6,10 +6,3 @@
     state: "{{ apache_packages_state }}"
     enablerepo: "{{ apache_enablerepo | default(omit, true) }}"
 
-#RedHat SELIUX Secuirty
-- name: Set httpd_can_network flag on and keep it persistent across reboots
-  become: true
-  ansible.posix.seboolean:
-    name: httpd_can_network_connect
-    state: yes 
-    persistent: yes

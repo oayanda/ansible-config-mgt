@@ -9,6 +9,15 @@
 {% endif %}
 {% if vhost.documentroot is defined %}
   DocumentRoot "{{ vhost.documentroot }}"
+   DocumentRoot "{{ vhost.documentroot }}"
+  <Proxy "balancer://myapp1">
+          BalancerMember http://Web1:80 loadfactor=5 timeout=1
+          BalancerMember http://Web2:80 loadfactor=5 timeout=1
+          ProxySet lbmethod=bytraffic
+  </Proxy>
+  ProxyPreserveHost On
+  ProxyPass / balancer://myapp1/
+  ProxyPassReverse / balancer://myapp1/
 {% endif %}
 
 {% if vhost.serveradmin is defined %}
