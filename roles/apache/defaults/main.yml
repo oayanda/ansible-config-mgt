@@ -63,7 +63,7 @@ apache_packages_state: present
 
 
 enable_apache_lb: false
-loadbalancer_is_required: false
+load_balancer_is_required: false
 
 # My webservers
 loadbalancer_name: "myapp1"
