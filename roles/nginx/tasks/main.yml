@@ -1,61 +1,35 @@
 ---
-# Variable setup.
-- name: Include OS-specific variables.
-  include_vars: "{{ ansible_os_family }}.yml"
-
-- name: Define nginx_user.
-  set_fact:
-    nginx_user: "{{ __nginx_user }}"
-  when: nginx_user is not defined
-
-# Setup/install tasks.
-- include_tasks: setup-RedHat.yml
-  when: ansible_os_family == 'RedHat'
-
-- include_tasks: setup-Ubuntu.yml
-  when: ansible_distribution == 'Ubuntu'
-
-- include_tasks: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
-
-- include_tasks: setup-FreeBSD.yml
-  when: ansible_os_family == 'FreeBSD'
-
-- include_tasks: setup-OpenBSD.yml
-  when: ansible_os_family == 'OpenBSD'
-
-- include_tasks: setup-Archlinux.yml
-  when: ansible_os_family == 'Archlinux'
-
-# Vhost configuration.
-- import_tasks: vhosts.yml
-
-# Set Host name for both webserver in /etc/hosts
-- name: set webservers host name in /etc/hosts
-  become: yes
-  blockinfile: 
-    path: /etc/hosts
-    block: |
-      {{ item.ip }} {{ item.name }}
-  loop:
-    - { name: web1, ip: 172.31.81.6 }
-    - { name: web2, ip: 172.31.93.118 }
-
-# Nginx setup.
-- name: Copy nginx configuration in place.
+- name: install apache
   become: true
-  template:
-    src: "{{ nginx_conf_template }}"
-    dest: "{{ nginx_conf_file_path }}"
-    owner: root
-    group: "{{ root_group }}"
-    mode: 0644
-  notify:
-    - reload nginx
+  ansible.builtin.yum:
+    name: "httpd"
+    state: present
 
-- name: Ensure nginx service is running as configured.
+- name: install git
   become: true
-  service:
-    name: nginx
-    state: "{{ nginx_service_state }}"
-    enabled: "{{ nginx_service_enabled }}"
+  ansible.builtin.yum:
+    name: "git"
+    state: present
+
+- name: clone a repo
+  become: true
+  ansible.builtin.git:
+    repo: https://github.com/oayanda/tooling.git
+    dest: /var/www/html
+    force: yes
+
+- name: copy html content to one level up
+  become: true
+  command: cp -r /var/www/html/html/ /var/www/
+
+- name: Start service httpd, if not started
+  become: true
+  ansible.builtin.service:
+    name: httpd
+    state: started
+
+- name: recursively remove /var/www/html/html/ directory
+  become: true
+  ansible.builtin.file:
+    path: /var/www/html/html
+    state: absent
