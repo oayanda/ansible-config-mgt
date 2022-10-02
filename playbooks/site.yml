@@ -31,7 +31,7 @@
 #   tags:
 #     - always
 
-# -  hosts: webservers
+# - hosts: webservers
 # - name: Webserver assignment
 #   import_playbook: ../static-assignments/webservers.yml
 
