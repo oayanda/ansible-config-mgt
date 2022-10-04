@@ -1,0 +1,5 @@
+enable_nginx_lb: false
+load_balancer_is_required: false
+
+webserver1: 172.31.28.86
+webserver2: 172.31.25.146

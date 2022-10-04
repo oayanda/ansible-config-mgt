@@ -5,15 +5,15 @@
   "uploadOnSave": true,
   "useAtomicWrites": false,
   "deleteLocal": false,
-  "hostname": "192.168.56.111",
+  "hostname": "54.172.31.39",
   "port": "22",
-  "target": "/home/osboxes/ansible-demos-exercises/",
+  "target": "/home/ubuntu/ansible-config/",
   "ignore": [
     ".remote-sync.json",
     ".git/**"
   ],
-  "username": "osboxes",
-  "password": "osboxes.org",
+  "username": "ubuntu",
   "watch": [],
-  "transport": "scp"
+  "transport": "scp",
+  "keyfile": "C:/Users/Oluwabamidele/Downloads/bammy-ec2.pem"
 }

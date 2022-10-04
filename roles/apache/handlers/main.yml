@@ -1,0 +1,7 @@
+---
+- name: Restart apache2 service
+  become_method: sudo
+  become: yes
+  service:
+    name: apache2
+    state: restarted
